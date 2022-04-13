@@ -1,0 +1,115 @@
+﻿@model List<Borna.Domain.Entities.Course.CourseEpisode>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int courseID = ViewBag.CourseID;
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                لیست قسمت ها
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="col-md-12" style="margin: 10px 0;">
+                    <div class="row">
+                       
+               
+                                <a class="btn btn-default btn-sm" style="background-color:green;border:solid" href="/Admin/episode/addEpisode/@ViewBag.CourseID">افزودن قسمت</a>
+                            </div>
+                        
+                    </div>
+                    <div class="col-md-12" style="margin: 10px 0;">
+
+                        @*<a asp-page="AddCourse" class="btn btn-outline btn-success">افزودن کاربر جدید</a>*@
+
+                    </div>
+                    <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" aria-describedby="dataTables-example_info">
+                        <thead>
+                            <tr>
+
+                                <th>نام </th>
+                                <th>زمان </th>
+                                <th>رایگان است؟</th>
+                                
+
+                                <th>دستورات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td>@item.EpisodeTitle</td>
+                                    <td>@item.EpisodeTime</td>
+                                    <td>
+                                        @if (item.IsFree)
+                                        {
+                                            <p class="text-success">بله</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="text-danger">خیر</p>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="/admin/episode/edit/@item.EpisodeID" style="background-color:sandybrown;border:solid" class="btn btn-warning">ویرایش</a>
+                                        <a onclick="DeleteEpisode(@item.EpisodeID)" style="background-color:red;border:solid" class="btn btn-danger">حذف</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                                <ul class="pagination">
+
+                                    @*@for (int i = 1; i <= Model.Item2 + 1; i++)
+                                    {
+                                        <li class="paginate_button @((i==ViewBag.currentPage)?"active":"")" aria-controls="dataTables-example" tabindex="0">
+                                            <a href="/Admin/users?PageId=@i">@i</a>
+                                        </li>
+
+                                    }*@
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        function DeleteEpisode (episodeId) {
+
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("DeleteEpisode")",
+            data: { EpisodeID: episodeId },
+            dataType: "text",
+            success: function (msg) {
+                console.log(msg);
+
+            },
+            error: function (req, status, error) {
+                console.log(msg);
+            }
+        }).then(function (isConfirm) {
+            location.reload();
+        });
+    };
+    </script>
+}

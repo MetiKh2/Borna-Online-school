@@ -1,0 +1,113 @@
+﻿@model Borna.Domain.Entities.User.User
+@{
+    ViewData["Title"] = "AddUser";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    List<Borna.Domain.Entities.User.Role> roles = ViewBag.Roles;
+}
+
+
+<div class="widget-inner">
+    <form class="edit-profile m-b30" asp-action="AddUser" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-12">
+                <div class="ml-auto">
+                    <h3> اطلاعات </h3>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label class="col-form-label">نام و نام خانوادگی</label>
+                <div>
+                    <input class="form-control" type="text" asp-for="FullName">
+                </div>
+                <span asp-validation-for="FullName"></span>
+            </div>
+            <div class="form-group col-6">
+                <label class="col-form-label">نام کاربری</label>
+                <div>
+                    <input class="form-control" type="text" asp-for="UserName">
+                </div>
+                <span asp-validation-for="UserName"></span>
+            </div>
+            <div class="form-group col-6">
+                <label class="col-form-label">رمز عبور</label>
+                <div>
+                    <input class="form-control" type="text" asp-for="Password">
+                </div>
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group col-6">
+                <label class="col-form-label">ایمیل</label>
+                <div>
+                    <input class="form-control" type="text" asp-for="Email">
+                </div>
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group col-6">
+                <label class="col-form-label">آواتار</label>
+                <div>
+                    <input id="imgCourseUp" class="form-control" type="file" name="Image" />
+
+                </div>
+
+
+
+
+                <div class="form-group col-6">
+                    <label class="col-form-label">آواتار</label>
+                    <div>
+                        <img id="imgCourse" src="~/UserAvatars/Default.jpg" style="width:300px" />
+                    </div>
+                </div>
+
+                <div class="form-group col-6">
+                    <b> <label class="col-form-label">نقش ها</label></b>
+                    @foreach (var item in roles)
+                    {
+                <div>
+                    <input  name="selectedRoles" type="checkbox" value="@item.RoleID" />  @item.RoleTitle
+                    
+                </div>
+                    }
+                </div>
+
+
+                <div class="seperator"></div>
+
+
+
+
+                <div class="col-12">
+
+                    <button type="submit" class="btn">ذخیره تغییرات</button>
+                </div>
+            </div>
+</form>
+</div>
+
+@section Scripts
+{
+    <script>
+
+
+
+
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgCourse').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgCourseUp").change(function () {
+            readURL(this);
+        });
+    </script>
+}
+

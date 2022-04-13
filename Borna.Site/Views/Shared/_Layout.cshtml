@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+
+
+<!-- Mirrored from atiyehahmadi.ir/ejuchamp/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Apr 2020 02:38:27 GMT -->
+<head>
+
+    <!-- META ============================================= -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="index-2.html" />
+    <!-- OG -->
+    <meta name="robots" content="index, follow">
+
+    <meta name="keywords" content="Web Design, Education, Institute, Study" />
+    <meta name="author" content="ThemeTrades" />
+    <meta name="description"
+          content="EduChamp is a Fully Creative Mobile Responsive HTML Template. It is designed specifically for University, College, School, Training centre or other educational institute." />
+
+    <meta property="og:url" content="index-2.html" />
+    <meta property="og:site_name" content="EduChamp : Education HTML Template" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_us" />
+    <meta property="og:title" content="EduChamp : Education HTML Template" />
+    <meta property="og:description"
+          content="EduChamp is a Fully Creative Mobile Responsive HTML Template. It is designed specifically for University, College, School, Training center or other educational institute." />
+    <meta property="og:image" content="preview.html" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="index-2.html">
+
+    <meta name="twitter:title" content="EduChamp : Education HTML Template">
+    <meta name="twitter:description"
+          content="EduChamp is a Fully Creative Mobile Responsive HTML Template. It is designed specifically for University, College, School, Training centre or other educational institute.">
+
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- FAVICONS ICON ============================================= -->
+    <link rel="icon" href="~/SiteTemplate/assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/SiteTemplate/assets/images/favicon.png" />
+
+    <!-- PAGE TITLE HERE ============================================= -->
+    <title>@ViewData["Title"]</title>
+
+    <!-- MOBILE SPECIFIC ============================================= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.min.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+    <!-- All PLUGINS CSS ============================================= -->
+    <partial name="_Styles" />
+
+    <!-- REVOLUTION SLIDER END -->
+</head>
+
+<body id="bg">
+    <div class="page-wraper">
+        <div id="loading-icon-bx"></div>
+        <!-- Header Top ==== -->
+        <header class="header rs-nav">
+            <div class="top-bar">
+                <div class="container">
+                    <div class="row d-flex justify-content-between">
+                        <div class="topbar-left">
+                            <ul>
+                                <li><a href="faq-1.html"><i class="fa fa-question-circle"></i>از ما بپرسید</a></li>
+                                <li><a href="javascript:;"><i class="fa fa-envelope-o"></i>Support@website.com</a></li>
+                            </ul>
+                        </div>
+                        <div class="topbar-right">
+                            <ul>
+                                <li>
+                                    <select class="header-lang-bx">
+                                        <option data-icon="flag flag-uk">انگلیسی</option>
+                                        <option data-icon="flag flag-us">عربی</option>
+                                    </select>
+                                </li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                    <li><a href="/userPanel">‌@User.Identity.Name خوش آمدید</a></li>
+                                    <li><a href="/logout">‌  خروج</a></li>
+ }
+                                else
+                                {
+
+
+
+                    <li><a href="/login">ورود</a></li>
+                                    <li><a href="/register">ثبت‌نام</a></li>
+}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sticky-header navbar-expand-lg">
+                <div class="menu-bar clearfix">
+                    <div class="container clearfix">
+                        <!-- Header Logo ==== -->
+                        <div class="menu-logo">
+                            <a href="index.html"><img src="~/SiteTemplate/assets/images/logo.png" alt=""></a>
+                        </div>
+                        <!-- Mobile Nav Button ==== -->
+                        <button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-toggle="collapse"
+                                data-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <!-- Author Nav ==== -->
+                        <div class="secondary-menu">
+                            <div class="secondary-inner">
+                                <ul>
+                                    <li><a href="javascript:;" class="btn-link"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="javascript:;" class="btn-link"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="javascript:;" class="btn-link"><i class="fa fa-linkedin"></i></a></li>
+                                    <!-- Search Button ==== -->
+                                    <li class="search-btn">
+                                        <button id="quik-search-btn" type="button" class="btn-link">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Search Box ==== -->
+                        <div class="nav-search-bar">
+                            <form action="#">
+                                <input name="search" value="" type="text" class="form-control" placeholder="جستجو...">
+                                <span><i class="ti-search"></i></span>
+                            </form>
+                            <span id="search-remove"><i class="ti-close"></i></span>
+                        </div>
+                        <!-- Navigation Menu ==== -->
+                        <div class="menu-links navbar-collapse collapse justify-content-start" id="menuDropdown">
+                            <div class="menu-logo">
+                                <a href="index.html"><img src="~/SiteTemplate/assets/images/logo.png" alt=""></a>
+                            </div>
+                            <ul class="nav navbar-nav">
+                      
+                               @await Component.InvokeAsync("CourseGroupesComponent")
+                            </ul>
+                            <div class="nav-social-link">
+                                <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                                <a href="javascript:;"><i class="fa fa-google-plus"></i></a>
+                                <a href="javascript:;"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <!-- Navigation Menu END ==== -->
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header Top END ==== -->
+        <!-- Content -->
+
+        @RenderBody()
+        <!-- Content END-->
+        <!-- Footer ==== -->
+        <partial name="_Footer" />
+
+        <!-- Footer END ==== -->
+        <button class="back-to-top fa fa-chevron-up"></button>
+    </div>
+
+    <!-- External JavaScripts -->
+
+    <partial name="_Scripts" />
+    @RenderSection("Scripts",false)
+</body>
+
+
+
+<!-- Mirrored from atiyehahmadi.ir/ejuchamp/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Apr 2020 02:38:27 GMT -->
+</html>
+
+

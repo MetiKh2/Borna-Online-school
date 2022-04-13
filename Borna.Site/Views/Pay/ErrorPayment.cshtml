@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "ErrorPayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/"> برنا</a></li>
+     
+    </ul>
+</nav>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="alert alert-dark">
+        <h2>با خطا مواجه شدیم</h2>
+        <p>اگر مبلغ از حساب شما کسر شده با ما تماس بگیرید</p>
+        <p>ممنون از حمیت درخشانتان</p>
+    </div>
+
+}
+
+

@@ -1,0 +1,65 @@
+﻿@model Borna.Domain.Entities.Course.CourseEpisode
+@{
+    ViewData["Title"] = "AddEpisode";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="widget-inner">
+    <form class="edit-profile m-b30" asp-action="AddEpisode" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="CourseID"/>
+        <div class="row">
+            <div class="col-12">
+                <div class="ml-auto">
+                    <h3> اطلاعات </h3>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label class="col-form-label">نام قسمت</label>
+                <div>
+                    <input class="form-control" type="text" asp-for="EpisodeTitle">
+                </div>
+                <span asp-validation-for="EpisodeTitle"></span>
+            </div>
+            <div class="form-group col-6">
+                <label class="col-form-label">زمان</label>
+                <div>
+                    <input  type="text"  asp-for="EpisodeTime" class="form-control" >
+                    <span asp-validation-for="EpisodeTime"></span>
+                </div>
+               
+            </div>
+            <div class="form-group col-6">
+                <label class="col-form-label">فایل</label>
+                <div>
+                    <input class="form-control" name="file" type="file" asp-for="EpisodeFile">
+                </div>
+                @if (ViewBag.ExistTitle==true)
+                {
+                    <p class="text-danger">نام فابل معتبر نیست , تغییر دهید</p>
+                }
+            </div>
+            <div class="form-group col-6">
+                <label class="col-form-label">رایگان است ؟</label>
+                <div>
+                    <input class="form-control" type="checkbox" asp-for="IsFree">
+                </div>
+                <span asp-validation-for="IsFree"></span>
+            </div>
+            <div class="form-group col-6">
+           
+            <div class="seperator"></div>
+
+
+
+
+                <div class="col-12">
+
+                    <button type="submit" class="btn">ذخیره تغییرات</button>
+                </div>
+            </div>
+            </div>
+    </form>
+</div>
+
+

@@ -1,0 +1,88 @@
+﻿@model List<Borna.Domain.Entities.Course.Course> 
+@{
+    ViewData["Title"] = "دوره های من";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="page-content bg-white">
+    <!-- inner page banner -->
+    <div class="page-banner ovbl-dark" style="background-image:@Url.Content("banner1.jpg");">
+        <div class="container">
+            <div class="page-banner-entry">
+                <h1 class="text-white">پروفایل</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb row -->
+    <div class="breadcrumb-row">
+        <div class="container">
+            <ul class="list-inline">
+                <li><a href="#">خانه</a></li>
+                <li>پروفایل</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Breadcrumb row END -->
+    <!-- inner page banner END -->
+    <div class="content-block">
+        <!-- About Us -->
+        <div class="section-area section-sp1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-12 m-b30">
+                        <partial name="_SideBar">
+                    </div>
+                    <div class="col-lg-9 col-md-8 col-sm-12 m-b30">
+                        <div class="profile-content-bx">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="courses">
+                                    <div class="profile-head">
+                                        <h3>دوره‌های من</h3>
+                                        
+                                    </div>
+                                    <div class="courses-filter">
+                                        <div class="clearfix">
+                                            <ul id="masonry" class="ttr-gallery-listing magnific-image row" style="position: relative; height: 1099.78px;">
+
+                                                @foreach (var item in Model)
+                                                {
+                                                    <li class="action-card col-xl-4 col-lg-6 col-md-12 col-sm-6 " style="position: absolute; right: 0px; top: 0px;">
+                                                        <div class="cours-bx">
+                                                            <div class="action-box">
+                                                                <img src="/Course/ThumbCourseImage/@item.CourseImage" alt="">
+                                                                <a href="/showCourse/@item.CourseID" class="btn">بیشتر بخوانید</a>
+                                                            </div>
+                                                            <div class="info-bx text-center">
+                                                                <h5><a href="/showcourse/@item.CourseID">@item.CourseTitle</a></h5>
+                                                                <span>@item.ParentCourseGroupe.GroupeTitle</span>
+                                                            </div>
+                                                            <div class="cours-more-info">
+                                                                <div class="review">
+                                                                    <span>@item.CourseComments.Count() نظرات</span>
+                                                                 
+                                                                </div>
+                                                                <div class="price">
+                                                                  
+                                                                    <h5> @item.Price.ToString("n0") تومان </h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!--Content-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- contact area END -->
+</div>
+<!-- Content END-->

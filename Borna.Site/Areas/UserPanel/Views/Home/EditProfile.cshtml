@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewData["Title"] = "ویرایش حساب کاربری";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="page-content bg-white">
+    <!-- inner page banner -->
+    <div class="page-banner ovbl-dark" style="background-image:@Url.Content("banner1.jpg");">
+        <div class="container">
+            <div class="page-banner-entry">
+                <h1 class="text-white">پروفایل</h1>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb row -->
+    <div class="breadcrumb-row">
+        <div class="container">
+            <ul class="list-inline">
+                <li><a href="/">خانه</a></li>
+                <li>پروفایل</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Breadcrumb row END -->
+    <!-- inner page banner END -->
+    <div class="content-block">
+        <!-- About Us -->
+        <div class="section-area section-sp1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-12 m-b30">
+                        <partial name="_SideBar">
+                    </div>
+                    <div class="col-lg-9 col-md-8 col-sm-12 m-b30">
+                        <div class="tab-pane" id="change-password">
+                            <div class="profile-head">
+                                <h3>تغییر نام و نام خانوادگی</h3>
+                            </div>
+                            <form class="edit-profile" asp-action="EditProfile" method="post" enctype="multipart/form-data">
+                                <div class="">
+                                    <div class="form-group row">
+                                        <div class="col-12 col-sm-8 col-md-8 col-lg-9 ml-auto">
+                                            <h3>نام و نام خانوادگی </h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-12 col-sm-4 col-md-4 col-lg-3 col-form-label">نام و نام خانوادگی جدید </label>
+                                        <div class="col-12 col-sm-8 col-md-8 col-lg-7">
+                                            <input name="fullName" class="form-control" type="text" required value="@ViewBag.FullName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-12 col-sm-4 col-md-4 col-lg-3 col-form-label">عکس پروفایل (اگر عکسی وارد نکنید عکس قبلی لحاظ می شود) </label>
+                                        <div class="col-12 col-sm-8 col-md-8 col-lg-7">
+                                            <input name="image" class="form-control" type="file">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-4 col-md-4 col-lg-3">
+                                    </div>
+                                    <div class="col-12 col-sm-8 col-md-8 col-lg-7">
+                                        <button type="submit" class="btn">ذخیره تغییرات</button>
+                                        <button type="reset" class="btn-secondry">انصراف</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                    <!--Content-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- contact area END -->
+</div>
+<!-- Content END-->

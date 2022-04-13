@@ -1,0 +1,35 @@
+﻿@model Tuple<int,int>
+@{
+    Layout = null;
+}
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="row">
+        <img src="https://toplearn.com/img/votew.jpg" />
+        <p></p>
+        <a class="btn-success" onclick="AddVote(true)">
+            <img class="btnLike" src="https://toplearn.com/img/like.png" />
+            میپسندم (@Model.Item1)
+        </a>
+
+        <a class="btn-danger" onclick="AddVote(false)">
+            <img class="btnLike" src="https://toplearn.com/img/dislike.png" />
+            نمیپسندم(@Model.Item2)
+        </a>
+
+    </div>
+}
+
+@*@section Scripts{
+        <script>
+         function AddVote(vote) {
+
+            $("#Votes").load("/Course/AddVote?courseId=" +@Model.CourseID+"&vote="vote);
+            $("#Votes").fadeIn("slow");
+
+        }
+        </script>
+    }*@

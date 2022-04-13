@@ -1,0 +1,88 @@
+﻿@model Borna.Domain.Entities.User.Role
+    @{
+        ViewData["Title"] = "AddRole";
+        Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+        List<Borna.Domain.Entities.Permission.Permission> Permissions = ViewBag.Permissions;
+    }
+
+
+    <div class="widget-inner">
+        <form class="edit-profile m-b30" asp-action="AddRole" method="post" >
+            <div class="row">
+                <div class="col-12">
+                    <div class="ml-auto">
+                        <h3> اطلاعات </h3>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label class="col-form-label">نام نقش</label>
+                    <div>
+                        <input class="form-control" type="text" asp-for="RoleTitle">
+                    </div>
+                    <span asp-validation-for="RoleTitle"></span>
+                </div>
+
+
+
+                <div class="seperator"></div>
+                <div style="margin-right:14px">
+                    <ul>
+
+                        @foreach (var item in Permissions.Where(p => p.ParentID == null))
+                        {
+                            <li>
+                                <input name="selectedPermissions" type="checkbox" value="@item.PermissionID" />  @item.PermissionTitle
+
+                                @if (Permissions.Any(p => p.ParentID == item.PermissionID))
+                                {
+
+                                    <ul>
+
+                                        @foreach (var sub in Permissions.Where(p => p.ParentID == item.PermissionID))
+                                        {
+                                            <li>
+
+                                                <input style="margin-right:7px" name="selectedPermissions" type="checkbox" value="@sub.PermissionID" />  @sub.PermissionTitle
+
+                                                @if (Permissions.Any(p => p.ParentID == sub.PermissionID))
+                                                {
+                                                    <ul>
+
+                                                        @foreach (var sub2 in Permissions.Where(p => p.ParentID == sub.PermissionID))
+                                                        {
+                                                            <li>
+                                                                <input style="margin-right:7px" name="selectedPermissions" type="checkbox" value="@sub2.PermissionID" />  @sub2.PermissionTitle
+
+                                                            </li>
+                                                        }
+
+
+                                                    </ul>
+                                                }
+
+
+                                            </li>
+                                        }
+
+                                    </ul>
+
+                                }
+
+
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+             
+
+
+                <div class="col-12">
+
+                    <button type="submit" style="background-color:chartreuse;border:thin" class="btn">ذخیره تغییرات</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+

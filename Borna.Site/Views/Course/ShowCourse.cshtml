@@ -1,0 +1,392 @@
+﻿@model Borna.Domain.Entities.Course.Course
+@{
+    ViewData["Title"] = "ShowCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumb-row">
+    <div class="container">
+        <ul class="list-inline">
+            <li><a href="#">خانه</a></li>
+            <li>جزییات دوره</li>
+        </ul>
+    </div>
+</div>
+
+<div class="content-block" onload="Loaded()">
+    <!-- About Us -->
+    <div class="section-area section-sp1">
+        <div class="container">
+            <div class="row d-flex flex-row-reverse">
+                <div class="col-lg-3 col-md-4 col-sm-12 m-b30">
+                    <div class="course-detail-bx">
+                        <div class="course-price">
+
+                            @if (Model.Price != 0 && ViewBag.UserBuy == false)
+                            {
+
+
+                                <h4 class="price"> @Model.Price.ToString("n0") تومان </h4>
+                                <div class="course-buy-now text-center">
+                                    <a class="btn" href="/pay/index?price=@Model.Price&courseId=@Model.CourseID&courseTitle=@Model.CourseTitle">خرید دوره </a>
+                                </div>
+
+                            }
+                            else if (Model.Price != 0 && ViewBag.UserBuy == true)
+                            {
+                                <h2 class="price" style="color:green"> شما این دوره را خریداری کرده اید</h2>
+
+                            }
+                            else
+                            {
+                                <h4 class="price" style="color:green"> رایگان</h4>
+
+
+                            }
+                        </div>
+                        <div class="teacher-bx">
+                            <div class="teacher-info">
+                                <div class="teacher-thumb">
+                                    <img src="~/UserAvatars/@Model.Teacher.UserAvatar" alt="">
+                                </div>
+                                <div class="teacher-name">
+                                    <h5>@Model.Teacher.UserName</h5>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cours-more-info">
+                            <div class="review">
+                                <span><strong>@Model.CourseComments.Count() نظرات</strong></span>
+
+                            </div>
+                            <div class="price categories">
+                                <span>دسته‌بندی‌ها</span>
+                                <h5 class="text-primary">@Model.ParentCourseGroupe.GroupeTitle--@Model.SubCourseGroupe.GroupeTitle</h5>
+                            </div>
+                        </div>
+                        <div class="course-info-list scroll-page scroller">
+                            <ul class="navbar">
+                                <li><a class="nav-link" href="#overview"><i class="ti-zip"></i>بررسی اجمالی</a></li>
+                                <li><a class="nav-link" href="#curriculum"><i class="ti-bookmark-alt"></i>برنامه تحصیلی</a></li>
+                                <li><a class="nav-link" href="#instructor"><i class="ti-user"></i>مربی</a></li>
+                                <li><a class="nav-link" href="#reviews"><i class="ti-comments"></i>نظرات</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9 col-md-8 col-sm-12">
+                    <div class="courses-post">
+                        <div class="ttr-post-media media-effect">
+                            <a href="#"><img src="~/Course/CourseImage/@Model.CourseImage" alt=""></a>
+                        </div>
+                        <div class="ttr-post-info">
+                            <div class="ttr-post-title ">
+                                <h2 class="post-title">@Model.CourseTitle</h2>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="courese-overview" id="overview">
+                        <h4>بررسی اجمالی</h4>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-4">
+                                <ul class="course-features">
+                                    <li>
+                                        <i class="ti-book"></i> <span class="label">درس</span> <span class="value">8</span>
+                                    </li>
+                                    <li>
+                                        <i class="ti-help-alt"></i> <span class="label">وضعیت</span> <span class="value">@ViewBag.Status</span>
+                                    </li>
+                                    <li>
+                                        <i class="ti-time"></i> <span class="label">مدت زمان</span> <span class="value">
+                                            60
+                                            ساعت
+                                        </span>
+                                    </li>
+                                    <li><i class="ti-stats-up"></i> <span class="label">سطح</span> <span class="value">@ViewBag.lavel</span></li>
+                                    <li><i class="ti-smallcap"></i> <span class="label">زبان</span> <span class="value">@ViewBag.language</span></li>
+                                    <li>
+                                        <i class="ti-user"></i> <span class="label">دانشجویان</span> <span class="value">@ViewBag.UsersCount</span>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="col-md-12 col-lg-8">
+                                <p>@Model.CourseDescription </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    @if (ViewBag.Episode != null)
+                    {
+
+                        Borna.Domain.Entities.Course.CourseEpisode courseEpisode = ViewBag.Episode as Borna.Domain.Entities.Course.CourseEpisode;
+
+
+                        <h2>@courseEpisode.EpisodeTitle</h2>
+                        <video style="width: 100%" controls>
+                            <source src="@ViewBag.onlineFile" type="video/mp4" />
+                        </video>
+                    }
+                    <div class="m-b30" id="curriculum">
+                        <h4>برنامه تحصیلی</h4>
+
+                        <ul class="curriculum-list">
+                            <li>
+
+                                <ul>
+
+                                    @foreach (var item in Model.CourseEpisodes)
+                                    {
+                                        @if (item.IsFree == false && ViewBag.UserBuy == false)
+                                        {
+
+
+                                            <li>
+                                                <div class="curriculum-list-box">
+                                                    @item.EpisodeTitle
+                                                </div>
+                                                <span>@item.EpisodeTime</span>
+                                            </li>
+
+
+                                        }
+                                        else if (item.IsFree && ViewBag.UserBuy == true)
+                                        {
+
+                                            <li>
+
+                                                <div class="curriculum-list-box">
+                                                    <a href="/DownloadEpisode/@item.EpisodeID">@item.EpisodeTitle </a>
+                                                </div>
+                                                <a href="/ShowCourse/@item.CourseID?episodeId=@item.EpisodeID" class="text-primary">تماشا</a>
+                                                <span>@item.EpisodeTime</span>
+
+                                            </li>
+
+                                        }
+                                        else
+                                        {
+
+
+                                            <li>
+                                                <a href="/DownloadEpisode/@item.EpisodeID">
+                                                    <div class="curriculum-list-box">
+                                                        @item.EpisodeTitle
+                                                    </div>
+                                                    <a href="/ShowCourse/@item.CourseID?episodeId=@item.EpisodeID" class="text-primary">تماشا</a>
+                                                    <span>@item.EpisodeTime</span>
+                                                </a>
+                                            </li>
+
+                                        }
+
+
+                                    }
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div id="votes">
+
+                    </div>
+
+                    <div class="" id="instructor">
+
+
+
+                    </div>
+                    <div class="" id="reviews">
+                        <h4 style="margin-top:8px">نظرات</h4>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-controller="Course" asp-action="AddComment" data-ajax="true"
+                                  data-ajax-method="post"
+                                  data-ajax-mode="replace"
+                                  data-ajax-update="#listComment"
+                                  data-ajax-success="Success">
+                                <input type="hidden" name="comment.CourseID" value="@Model.CourseID" />
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="comment_Comment" name="comment.Comment" placeholder="متن نظر"></textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button style="margin-bottom:12px;margin-left:6px" type="submit" class="btn btn-success"> ثبت دیدگاه </button>
+                                    </div>
+                                </div>
+
+
+                            </form>
+
+                        }
+                        else
+                        {
+
+                            <div class="alert alert-danger">
+                                جهت درج نظر باید وارد سایت شوید
+                            </div>
+                        }
+
+
+                        <div class="comment-list" id="listComment">
+
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                        @*<div class="review-bx">
+                                <div class="all-review">
+                                    <h2 class="rating-type">3</h2>
+                                    <ul class="cours-star">
+                                        <li class="active"><i class="fa fa-star"></i></li>
+                                        <li class="active"><i class="fa fa-star"></i></li>
+                                        <li class="active"><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                    </ul>
+                                    <span>3 رای</span>
+                                </div>
+                                <div class="review-bar">
+                                    <div class="bar-bx">
+                                        <div class="side">
+                                            <div>5 امتیاز</div>
+                                        </div>
+                                        <div class="middle">
+                                            <div class="bar-container">
+                                                <div class="bar-5" style="width:90%;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="side right">
+                                            <div>150</div>
+                                        </div>
+                                    </div>
+                                    <div class="bar-bx">
+                                        <div class="side">
+                                            <div>4 امتیاز</div>
+                                        </div>
+                                        <div class="middle">
+                                            <div class="bar-container">
+                                                <div class="bar-5" style="width:70%;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="side right">
+                                            <div>140</div>
+                                        </div>
+                                    </div>
+                                    <div class="bar-bx">
+                                        <div class="side">
+                                            <div>3 امتیاز</div>
+                                        </div>
+                                        <div class="middle">
+                                            <div class="bar-container">
+                                                <div class="bar-5" style="width:50%;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="side right">
+                                            <div>120</div>
+                                        </div>
+                                    </div>
+                                    <div class="bar-bx">
+                                        <div class="side">
+                                            <div>2 امتیاز</div>
+                                        </div>
+                                        <div class="middle">
+                                            <div class="bar-container">
+                                                <div class="bar-5" style="width:40%;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="side right">
+                                            <div>110</div>
+                                        </div>
+                                    </div>
+                                    <div class="bar-bx">
+                                        <div class="side">
+                                            <div>1 امتیاز</div>
+                                        </div>
+                                        <div class="middle">
+                                            <div class="bar-container">
+                                                <div class="bar-5" style="width:20%;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="side right">
+                                            <div>80</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+
+
+
+    <script>
+
+        function pageComment(pageId) {
+            $("#listComment").load("/Course/ShowComments/" + @Model.CourseID+"?pageId=" + pageId);
+        }
+
+
+        function Success() {
+            $("#comment_Comment").val("");
+        }
+
+
+           $(function() {
+            $("#listComment").load("/Course/ShowComments/" + @Model.CourseID);
+
+           });
+
+
+
+
+        $(function () {
+
+                $("#votes").load("/Course/ShowVotes/@Model.CourseID");
+          });
+
+      function AddVote(vote) {
+          $("#votes").fadeOut("slow");
+          $("#votes").load("/Course/AddVote?courseId=" +@Model.CourseID+"&vote="+vote);
+          $("#votes").fadeIn("slow");
+
+        }
+
+
+
+
+    </script>
+
+
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+
+        CKEDITOR.replace('comment_Comment', {
+            customConfig: '/js/Config.js'
+        });
+
+    </script>
+}

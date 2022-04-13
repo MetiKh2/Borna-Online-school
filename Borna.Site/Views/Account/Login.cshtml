@@ -1,0 +1,141 @@
+﻿@model Borna.Application.DTOs.UserViewModels.LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<!-- Mirrored from atiyehahmadi.ir/ejuchamp/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Apr 2020 02:38:24 GMT -->
+<head>
+
+    <!-- META ============================================= -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="index-2.html" />
+    <!-- OG -->
+    <meta name="robots" content="index, follow">
+
+    <meta name="keywords" content="Web Design, Education, Institute, Study" />
+    <meta name="author" content="ThemeTrades" />
+    <meta name="description"
+          content="EduChamp is a Fully Creative Mobile Responsive HTML Template. It is designed specifically for University, College, School, Training centre or other educational institute." />
+
+    <meta property="og:url" content="index-2.html" />
+    <meta property="og:site_name" content="EduChamp : Education HTML Template" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_us" />
+    <meta property="og:title" content="EduChamp : Education HTML Template" />
+    <meta property="og:description"
+          content="EduChamp is a Fully Creative Mobile Responsive HTML Template. It is designed specifically for University, College, School, Training center or other educational institute." />
+    <meta property="og:image" content="preview.html" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="index-2.html">
+
+    <meta name="twitter:title" content="EduChamp : Education HTML Template">
+    <meta name="twitter:description"
+          content="EduChamp is a Fully Creative Mobile Responsive HTML Template. It is designed specifically for University, College, School, Training centre or other educational institute.">
+
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- FAVICONS ICON ============================================= -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
+
+    <!-- PAGE TITLE HERE ============================================= -->
+    <title>ورود</title>
+
+    <!-- MOBILE SPECIFIC ============================================= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.min.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+    <!-- All PLUGINS CSS ============================================= -->
+    <partial name="_StylesRegisterAndLogin" />
+
+
+</head>
+
+<body id="bg">
+    <div class="page-wraper">
+        <div id="loading-icon-bx"></div>
+        <div class="account-form">
+            <div class="account-head" style="background-image:url(assets/images/background/bg2.jpg);">
+                <a href="index.html"><img src="assets/images/logo-white-2.png" alt=""></a>
+            </div>
+            <div class="account-form-inner">
+                <div class="account-container">
+                    <div class="heading-bx left">
+                        <h2 class="title-head">ورود به  <span> اکانت </span></h2>
+                        @if (ViewBag.IsSeccess == true)
+                        {
+                            <p class="text text-success">با موفقیت وارد شدید (به صفحه اصلی هدایت می شوید)</p>
+                            <script>
+                                setTimeout(function () {
+                                    window.location.href = "/";
+                                }, 2500);
+                            </script>
+                        }
+                        else
+                        {
+                            <p>اکانت ندارید? <a href="register.html"> همین حالا بسازید </a></p>
+
+                        }
+                    </div>
+                    <form class="contact-bx" asp-action="Login" method="post">
+                        <div class="row placeani">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <label>ایمیل یا نام کاربری</label>
+                                        <input asp-for="UserNameOrEmail" type="text" class="form-control">
+                                        <span class="text-danger" asp-validation-for="UserNameOrEmail"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <label>رمزعبور</label>
+                                        <input asp-for="Password" type="password" class="form-control">
+                                        <span class="text-danger" asp-validation-for="Password"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group form-forget">
+                                    <div class="custom-control custom-checkbox">
+                                      <label>مرا به خاطر بسپار</label>
+                                        <input type="checkbox" asp-for="RememberMe" />
+                                    </div>
+                                    <a href="/forgotPassword" class="ml-auto">فراموشی رمزعبور؟</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 m-b30">
+                                <button name="submit" type="submit" value="Submit" class="btn button-md">ورود</button>
+                            </div>
+                            <div class="col-lg-12">
+                                <h6 class="text-right">ورود از طریق</h6>
+                                <div class="d-flex">
+                                    <a class="btn flex-fill m-r5 facebook" href="#"><i class="fa fa-facebook"></i>فیسبوک</a>
+                                    <a class="btn flex-fill m-l5 google-plus" href="#"><i class="fa fa-google-plus"></i>گوگل</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- External JavaScripts -->
+    <partial name="_ScriptRegisterAndLogin" />
+</body>
+
+
+
+<!-- Mirrored from atiyehahmadi.ir/ejuchamp/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Apr 2020 02:38:26 GMT -->
+</html>

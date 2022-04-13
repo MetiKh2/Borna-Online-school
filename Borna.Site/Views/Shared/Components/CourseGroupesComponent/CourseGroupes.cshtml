@@ -1,0 +1,30 @@
+﻿@model List<Borna.Domain.Entities.Course.CourseGroupe>
+@{
+    ViewData["Title"] = "CourseGroupes";
+    Layout = null;
+}
+
+@foreach (var item in Model.Where(p => p.ParentID == null))
+{
+    <li class="">
+        <a href="/course/index?groupeId=@item.GroupeID">@item.GroupeTitle <i class="fa fa-chevron-down"></i></a>
+        @if (Model.Any(p => p.ParentID == item.GroupeID))
+        {
+            <ul class="sub-menu">
+                @foreach (var sub in Model.Where(p => p.ParentID == item.GroupeID))
+                {
+
+
+                    <li><a href="/course/index?groupeId=@sub.GroupeID"> @sub.GroupeTitle</a></li>
+
+
+
+                }
+             
+            </ul>
+        }
+
+    </li>
+}
+
+

@@ -1,0 +1,23 @@
+﻿@model int
+@{
+    ViewData["Title"] = "موفقیت";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/"> برنا</a></li>
+        <li class="breadcrumb-item active" aria-current="page">پایان ثبت نام</li>
+    </ul>
+</nav>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="alert alert-success">
+        <h2>@User.Identity.Name عزیز !</h2>
+        <p>با تشکر از خرید شما</p>
+        <p>ممنون از حمایت درخشانتان</p>
+        <a href="/showCourse/@Model">رفتن به دوره </a>
+    </div>
+
+}

@@ -1,0 +1,60 @@
+﻿@model Tuple<List<Borna.Domain.Entities.Course.CourseComment>, int>
+
+@{
+    Layout = null;
+}
+@using Borna
+@foreach (var item in Model.Item1)
+{
+    <div class="instructor-bx">
+        <div class="instructor-author">
+            <img src="/UserAvatars/@item.User.UserAvatar" alt="">
+        </div>
+        <div class="instructor-info">
+            <h6> @item.User.UserName </h6>
+            <span>@item.CreateDate.ToShamsi()</span>
+            @if (ViewBag.Checker==true)
+            {
+                <a href="/DeleteComment/@item.CommentID?courseId=@item.CourseID" class="btn-outline-danger">حذف</a>
+            }
+
+
+            <p class="m-b0">@Html.Raw(item.Comment)</p>
+        </div>
+    </div>
+
+
+}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+
+        @for (int i = 1; i <= Model.Item2+1; i++)
+        {
+            <li class="page-item"><a class="page-link" onclick="pageComment(@i)">@i</a></li>
+        }
+
+    </ul>
+</nav>
+
+@*<partial name="_Scripts"/>
+@section Scripts
+{
+<script src="~/SiteTemplate/assets/js/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        function deleteComment(commentId) {
+
+          
+
+            $.ajax({
+                type: "POST",
+                url: "/DeleteComment",
+                data: { CommentID: commentId },
+                dataType: "text",
+
+            }).then(function (isConfirm) {
+                location.reload();
+            });
+    };
+    </script>
+}*@
